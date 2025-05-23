@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "public": true,
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
@@ -25,10 +24,6 @@
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
         }
       ]
     },
@@ -46,7 +41,7 @@
       ]
     },
     {
-      "source": "/static/(.*)",
+      "source": "/**/*.css",
       "headers": [
         {
           "key": "Cache-Control",
@@ -55,7 +50,16 @@
       ]
     },
     {
-      "source": "/(.*\\.(css|js|jpg|jpeg|png|gif|ico|svg|woff|woff2))",
+      "source": "/**/*.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/**/*.{png,jpg,jpeg,gif,ico,svg}",
       "headers": [
         {
           "key": "Cache-Control",
