@@ -159,41 +159,197 @@ function initScrollEffects() {
 function initFullscreenFeature() {
     const fullscreenBtn = document.getElementById('fullscreen-btn');
     const gameFrame = document.getElementById('game-frame');
+    const fullscreenContainer = document.getElementById('fullscreen-container');
+    const fullscreenIframe = document.getElementById('fullscreen-iframe');
+    const fullscreenExitBtn = document.getElementById('fullscreen-exit-btn');
+    const fullscreenTopZone = document.getElementById('fullscreen-top-zone');
     
-    if (fullscreenBtn && gameFrame) {
-        fullscreenBtn.addEventListener('click', function() {
-            const gameContainer = gameFrame.parentElement.parentElement;
-            
-            if (!document.fullscreenElement) {
-                // 进入全屏
-                if (gameContainer.requestFullscreen) {
-                    gameContainer.requestFullscreen();
-                } else if (gameContainer.webkitRequestFullscreen) {
-                    gameContainer.webkitRequestFullscreen();
-                } else if (gameContainer.msRequestFullscreen) {
-                    gameContainer.msRequestFullscreen();
-                }
-                fullscreenBtn.innerHTML = '🔍 Exit Fullscreen';
-            } else {
-                // 退出全屏
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-                fullscreenBtn.innerHTML = '🔍 Fullscreen';
-            }
-        });
-        
-        // 监听全屏状态变化
-        document.addEventListener('fullscreenchange', function() {
-            if (!document.fullscreenElement) {
-                fullscreenBtn.innerHTML = '🔍 Fullscreen';
-            }
-        });
+    if (!fullscreenBtn || !gameFrame || !fullscreenContainer || !fullscreenIframe || !fullscreenExitBtn) {
+        console.warn('Fullscreen elements not found');
+        return;
     }
+
+    let isFullscreen = false;
+    let exitBtnHideTimer = null;
+    
+    // 进入全屏
+    function enterFullscreen() {
+        // 复制游戏URL到全屏iframe
+        fullscreenIframe.src = gameFrame.src;
+        
+        // 显示全屏容器
+        fullscreenContainer.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        isFullscreen = true;
+        fullscreenBtn.innerHTML = '🔍 Exit Fullscreen';
+        
+        // 显示退出按钮3秒后自动隐藏
+        showExitButton();
+        
+        console.log('Entered fullscreen mode');
+    }
+    
+    // 退出全屏
+    function exitFullscreen() {
+        fullscreenContainer.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // 清空全屏iframe源以节省资源
+        setTimeout(() => {
+            fullscreenIframe.src = '';
+        }, 300);
+        
+        isFullscreen = false;
+        fullscreenBtn.innerHTML = '🔍 Fullscreen';
+        
+        // 清除定时器
+        if (exitBtnHideTimer) {
+            clearTimeout(exitBtnHideTimer);
+            exitBtnHideTimer = null;
+        }
+        
+        console.log('Exited fullscreen mode');
+    }
+    
+    // 显示退出按钮
+    function showExitButton() {
+        fullscreenExitBtn.classList.add('visible');
+        
+        // 清除之前的定时器
+        if (exitBtnHideTimer) {
+            clearTimeout(exitBtnHideTimer);
+        }
+        
+        // 3秒后自动隐藏
+        exitBtnHideTimer = setTimeout(() => {
+            fullscreenExitBtn.classList.remove('visible');
+        }, 3000);
+    }
+    
+    // 隐藏退出按钮
+    function hideExitButton() {
+        fullscreenExitBtn.classList.remove('visible');
+        if (exitBtnHideTimer) {
+            clearTimeout(exitBtnHideTimer);
+            exitBtnHideTimer = null;
+        }
+    }
+    
+    // 全屏按钮点击事件
+    fullscreenBtn.addEventListener('click', function() {
+        if (!isFullscreen) {
+            enterFullscreen();
+        } else {
+            exitFullscreen();
+        }
+    });
+    
+    // 退出按钮点击事件 - 使用捕获阶段和阻止冒泡
+    fullscreenExitBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        console.log('Exit button clicked');
+        exitFullscreen();
+    }, true);
+    
+    // 额外的退出按钮事件监听（确保点击生效）
+    fullscreenExitBtn.addEventListener('mousedown', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        console.log('Exit button mousedown');
+        exitFullscreen();
+    });
+    
+    // ESC键退出全屏
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && isFullscreen) {
+            console.log('ESC key pressed');
+            exitFullscreen();
+        }
+    });
+    
+    // 鼠标移动到顶部区域显示退出按钮
+    fullscreenTopZone.addEventListener('mouseenter', function() {
+        if (isFullscreen) {
+            showExitButton();
+        }
+    });
+    
+    // 鼠标移动事件 - 在顶部80px区域内显示退出按钮
+    fullscreenContainer.addEventListener('mousemove', function(event) {
+        if (isFullscreen) {
+            if (event.clientY <= 80) {
+                showExitButton();
+            } else if (event.clientY > 120) {
+                // 如果鼠标移动到底部，隐藏按钮
+                hideExitButton();
+            }
+        }
+    });
+    
+    // 背景点击退出 - 修复点击事件
+    fullscreenContainer.addEventListener('click', function(event) {
+        console.log('Container clicked, target:', event.target);
+        
+        // 只有点击容器本身时才退出（不是子元素）
+        if (event.target === fullscreenContainer) {
+            console.log('Background clicked - exiting fullscreen');
+            exitFullscreen();
+        }
+    });
+    
+    // 额外的背景点击处理 - 监听iframe外的区域
+    document.addEventListener('click', function(event) {
+        if (isFullscreen) {
+            // 检查点击是否在全屏容器内但不在iframe或按钮上
+            const rect = fullscreenIframe.getBoundingClientRect();
+            const btnRect = fullscreenExitBtn.getBoundingClientRect();
+            
+            const x = event.clientX;
+            const y = event.clientY;
+            
+            // 如果点击在iframe外且不在按钮上，则退出全屏
+            const outsideIframe = (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom);
+            const outsideButton = (x < btnRect.left || x > btnRect.right || y < btnRect.top || y > btnRect.bottom);
+            
+            if (outsideIframe && outsideButton) {
+                console.log('Clicked outside game area - exiting fullscreen');
+                exitFullscreen();
+            }
+        }
+    });
+    
+    // 全屏iframe加载完成事件
+    fullscreenIframe.addEventListener('load', function() {
+        console.log('Fullscreen game loaded');
+    });
+    
+    // 全屏iframe加载错误处理
+    fullscreenIframe.addEventListener('error', function() {
+        console.error('Fullscreen game failed to load');
+        exitFullscreen();
+    });
+    
+    // 窗口大小改变时调整全屏显示
+    window.addEventListener('resize', function() {
+        if (isFullscreen) {
+            // 全屏时确保容器尺寸正确
+            fullscreenContainer.style.width = '100vw';
+            fullscreenContainer.style.height = '100vh';
+        }
+    });
+    
+    // 页面失去焦点时也要处理全屏状态
+    window.addEventListener('blur', function() {
+        if (isFullscreen) {
+            showExitButton();
+        }
+    });
+    
+    // 提供全局方法以便外部调用
+    window.enterGameFullscreen = enterFullscreen;
+    window.exitGameFullscreen = exitFullscreen;
 }
 
 // 平滑滚动
