@@ -198,7 +198,7 @@ location ~* \.(css|js|png|jpg|jpeg|gif|webp|svg)$ {
 ## 📧 联系方式
 
 如有问题或建议，请通过以下方式联系：
-- 网站：[368chickens.online](https://368chickens.online)
+- 网站：[www.368chickens.online](https://www.368chickens.online)
 - 项目问题：请提交 GitHub Issue
 
 ## 📄 许可证
