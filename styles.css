@@ -1,0 +1,240 @@
+/* 自定义字体类 */
+.font-fredoka {
+    font-family: 'Fredoka', cursive;
+}
+
+.font-comic {
+    font-family: 'Comic Neue', cursive;
+}
+
+/* 自定义动画 */
+@keyframes bounce-slow {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.animate-bounce-slow {
+    animation: bounce-slow 3s infinite;
+}
+
+/* 自定义渐变背景 */
+.gradient-chicken {
+    background: linear-gradient(135deg, #FEF3C7 0%, #FED7AA 50%, #FECACA 100%);
+}
+
+/* 玻璃态效果 */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* 卡片悬停效果 */
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* 按钮脉动效果 */
+@keyframes pulse-orange {
+    0% {
+        box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+    }
+}
+
+.btn-pulse {
+    animation: pulse-orange 2s infinite;
+}
+
+/* 滚动平滑 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+}
+
+/* iframe 样式优化 */
+#game-frame {
+    border-radius: 0 0 1rem 1rem;
+}
+
+/* 加载动画 */
+@keyframes spin-chicken {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.animate-spin-chicken {
+    animation: spin-chicken 2s linear infinite;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #f97316;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ea580c;
+}
+
+/* 导航栏固定时的阴影 */
+.nav-scrolled {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 游戏容器样式 */
+.game-container {
+    min-height: 600px;
+    background: linear-gradient(45deg, #FEF3C7, #FED7AA);
+}
+
+/* 特色卡片样式 */
+.feature-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(145deg, #ffffff, #f3f4f6);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* 按钮组样式 */
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 响应式网格 */
+.responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* 文本阴影效果 */
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 全屏按钮样式 */
+#fullscreen-btn {
+    transition: all 0.2s ease;
+}
+
+#fullscreen-btn:hover {
+    transform: scale(1.05);
+}
+
+/* 加载遮罩样式 */
+#loading-overlay {
+    transition: opacity 0.3s ease;
+}
+
+#loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 移动端菜单动画 */
+#mobile-menu {
+    transition: all 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+}
+
+#mobile-menu.show {
+    max-height: 200px;
+}
+
+/* 页脚渐变 */
+footer {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+}
+
+/* 链接悬停效果 */
+a {
+    transition: color 0.2s ease;
+}
+
+/* 图标动画 */
+.icon-bounce {
+    display: inline-block;
+    animation: bounce-slow 2s infinite;
+}
+
+/* 错误状态样式 */
+.error-state {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+/* 成功状态样式 */
+.success-state {
+    background: #dcfce7;
+    color: #16a34a;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+/* 自定义选择器样式 */
+::selection {
+    background: #f97316;
+    color: white;
+}
+
+/* 焦点样式 */
+button:focus,
+a:focus {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+}
+
+/* 暗色模式支持 */
+@media (prefers-color-scheme: dark) {
+    .auto-dark {
+        color-scheme: dark;
+    }
+} 

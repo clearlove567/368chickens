@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# 允许所有搜索引擎爬取整个网站
+Disallow:
+
+Sitemap: https://368chickens.online/sitemap.xml
+
+# 爬取延迟
+Crawl-delay: 1
+
+# 特定搜索引擎优化
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2 
