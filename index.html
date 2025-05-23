@@ -59,126 +59,134 @@
     
     <!-- JSON-LD Schema for Free Game -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "VideoGame",
-        "name": "368 Chickens",
-        "alternateName": "368 Chickens Rescue Game",
-        "description": "A completely free browser-based puzzle strategy game where players rescue 368 adorable chickens by lining up 3 chickens in strategic formations. No download required, play instantly online.",
-        "url": "https://368chickens.online/",
-        "genre": ["Puzzle", "Strategy", "Casual"],
-        "gamePlatform": ["Web Browser", "Online"],
-        "applicationCategory": "Game",
-        "operatingSystem": ["Windows", "macOS", "Linux", "Android", "iOS"],
-        "browserRequirements": "Modern web browser with HTML5 support",
-        "isAccessibleForFree": true,
-        "isFamilyFriendly": true,
-        "contentRating": "Everyone",
-        "offers": [
-            {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD",
-                "availability": "https://schema.org/InStock",
-                "priceValidUntil": "2030-12-31",
-                "category": "Free Game",
-                "description": "100% Free to Play - No Hidden Costs, No Registration Required"
-            }
-        ],
-        "aggregateRating": {
+        {
+          "@context": "https://schema.org",
+          "@type": "VideoGame",
+          "name": "368 Chickens",
+          "alternateName": "368 Chickens Rescue Game",
+          "url": "https://368chickens.online/",
+          "author": {
+            "@type": "Organization",
+            "name": "368 Chickens Development Team"
+          },
+          "description": "A completely free browser-based puzzle strategy game where players rescue 368 adorable chickens by lining up 3 chickens in strategic formations. No download required, play instantly online.",
+          "applicationCategory": "GameApplication",
+          "operatingSystem": ["Windows", "macOS", "Linux", "Android", "iOS"],
+          "browserRequirements": "Modern web browser with HTML5 support",
+          "gamePlatform": ["Web Browser", "Online"],
+          "genre": ["Puzzle", "Strategy", "Casual"],
+          "playMode": "SinglePlayer",
+          "numberOfPlayers": {
+            "@type": "QuantitativeValue",
+            "value": 1
+          },
+          "isAccessibleForFree": true,
+          "isFamilyFriendly": true,
+          "contentRating": "Everyone",
+          "offers": {
+            "@type": "Offer",
+            "price": "0.00",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "priceValidUntil": "2030-12-31",
+            "description": "100% Free to Play - No Hidden Costs, No Registration Required"
+          },
+          "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.8",
-            "bestRating": "5",
-            "worstRating": "1",
-            "ratingCount": "1250",
-            "reviewCount": "890"
-        },
-        "gameItem": {
+            "ratingCount": 1250,
+            "reviewCount": 890
+          },
+          "gameItem": {
             "@type": "Thing",
             "name": "Chicken Characters",
             "description": "368 adorable chicken characters to rescue"
-        },
-        "numberOfPlayers": {
-            "@type": "QuantitativeValue",
-            "minValue": 1,
-            "maxValue": 1,
-            "value": 1
-        },
-        "playMode": "SinglePlayer",
-        "author": {
-            "@type": "Organization",
-            "name": "368 Chickens Development Team"
-        },
-        "datePublished": "2024-01-01",
-        "inLanguage": "en",
-        "keywords": ["368 chickens game", "free puzzle game", "chicken rescue", "browser game", "strategy puzzle"],
-        "mainEntityOfPage": {
+          },
+          "datePublished": "2024-01-01",
+          "inLanguage": "en",
+          "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https://368chickens.online/"
+          },
+          "keywords": [
+            "368 chickens game",
+            "free puzzle game",
+            "chicken rescue",
+            "browser game",
+            "strategy puzzle"
+          ]
         }
-    }
-    </script>
+        </script>
+             
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "368 Chickens",
+              "applicationCategory": "GameApplication",
+              "operatingSystem": "All",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "ratingCount": 1250
+              },
+              "offers": {
+                "@type": "Offer",
+                "price": "0.00",
+                "priceCurrency": "USD"
+              }
+            }
+            </script>
 
-    <!-- Website Structure JSON -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "368 Chickens",
-        "url": "https://368chickens.online/",
-        "description": "Official website for 368 Chickens puzzle game",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://368chickens.online/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-        },
-        "mainEntity": {
-            "@type": "VideoGame",
-            "name": "368 Chickens",
-            "numberOfPlayers": {
-                "@type": "QuantitativeValue",
-                "value": 1
-            },
-            "genre": "Puzzle",
-            "gamePlatform": "Web Browser"
-        },
-        "breadcrumb": {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
+            <script type="application/ld+json">
                 {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://368chickens.online/"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Game",
-                    "item": "https://368chickens.online/#game"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": "Instructions",
-                    "item": "https://368chickens.online/#instructions"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 4,
-                    "name": "About",
-                    "item": "https://368chickens.online/#about"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 5,
-                    "name": "Player Reviews",
-                    "item": "https://368chickens.online/#reviews"
+                  "@context": "https://schema.org",
+                  "@type": "WebSite",
+                  "name": "368 Chickens",
+                  "url": "https://368chickens.online/",
+                  "inLanguage": "en",
+                  "description": "Official website for 368 Chickens puzzle game",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://368chickens.online/search?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
                 }
-            ]
-        }
-    }
-    </script>
+                </script>
+
+                <script type="application/ld+json">
+                    {
+                      "@context": "https://schema.org",
+                      "@type": "BreadcrumbList",
+                      "itemListElement": [
+                        {
+                          "@type": "ListItem",
+                          "position": 1,
+                          "name": "Home",
+                          "item": "https://368chickens.online/"
+                        },
+                        {
+                          "@type": "ListItem",
+                          "position": 2,
+                          "name": "Game",
+                          "item": "https://368chickens.online/#game"
+                        },
+                        {
+                          "@type": "ListItem",
+                          "position": 3,
+                          "name": "Instructions",
+                          "item": "https://368chickens.online/#instructions"
+                        },
+                        {
+                          "@type": "ListItem",
+                          "position": 4,
+                          "name": "About",
+                          "item": "https://368chickens.online/#about"
+                        }
+                      ]
+                    }
+                    </script>
+                    
 </head>
 <body class="min-h-screen bg-gradient-to-br from-yellow-100 via-orange-50 to-red-100">
     <!-- Header Navigation -->
